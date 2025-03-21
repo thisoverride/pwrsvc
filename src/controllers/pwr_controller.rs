@@ -1,10 +1,12 @@
 use std::path::Path;
 use crate::services::pwr_service::PwrService;
+use crate::services::pwr_service::PowerManagement;
 use crate::interface::model::{RequestData, ResponseData};
 use tokio::net::{UnixListener, UnixStream};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-use std::sync::Arc;
-use futures::stream::StreamExt;
+// Imports non utilisés supprimés
+// use std::sync::Arc;
+// use futures::stream::StreamExt;
 
 // Structure PwrController qui gère le socket et les communications
 pub struct PwrController<'a> {

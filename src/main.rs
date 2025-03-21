@@ -1,3 +1,4 @@
+// Déclarer les modules
 pub mod services;
 pub mod controllers;
 pub mod interface;
@@ -12,8 +13,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pwr_service = PwrService::new();
     
     // Créer le contrôleur avec le socket et le service
-    let socket_path: &Path = Path::new("/tmp/smx-iam-service");
-    let controller: PwrController<'_> = PwrController::new(socket_path, pwr_service);
+    let socket_path = Path::new("/tmp/smx-iam-service");
+    let controller = PwrController::new(socket_path, pwr_service);
     
     // Démarrer le contrôleur
     controller.start().await?;
