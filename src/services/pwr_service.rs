@@ -78,7 +78,9 @@ impl PwrService {
 
     // Méthode générique pour exécuter une commande D-Bus
     async fn execute_dbus_command(&self, method: &str, params: (bool,)) -> Result<(), PowerError> {
+        // Cloner la configuration et le nom de la méthode pour les posséder dans la closure
         let config = self.dbus_config.clone();
+        let method_owned = method.to_string(); // Convertir &str en String pour posséder les données
         
         tokio::task::spawn_blocking(move || -> Result<(), PowerError> {
             let conn = Connection::new_system()?;
@@ -88,8 +90,8 @@ impl PwrService {
                 Duration::from_millis(config.timeout_ms)
             );
             
-            // Correction ici - spécifier le type de retour explicitement
-            let _result: () = proxy.method_call(&config.interface, method, params)?;
+            // Utiliser la version possédée de method
+            let _result: () = proxy.method_call(&config.interface, &method_owned, params)?;
             Ok(())
         })
         .await
