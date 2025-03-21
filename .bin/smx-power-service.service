@@ -1,0 +1,41 @@
+[Unit]
+Description=SME Power Management Service
+After=network.target dbus.service
+Wants=dbus.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/local/bin/sme-pwrsvc
+Restart=on-failure
+RestartSec=5
+# Protection du service
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+# Accès spécifiques nécessaires
+CapabilityBoundingSet=CAP_SYS_BOOT
+# Nécessaire pour D-Bus et la gestion d'alimentation
+PrivateDevices=false
+NoNewPrivileges=false
+
+# Créer le répertoire pour le socket si nécessaire
+RuntimeDirectory=sme-power
+RuntimeDirectoryMode=0755
+
+# Limites de ressources
+MemoryLimit=50M
+TasksMax=10
+
+# Journalisation
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sme-power
+
+# Délais
+TimeoutStartSec=30
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
