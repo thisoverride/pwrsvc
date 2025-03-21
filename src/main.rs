@@ -3,7 +3,7 @@ pub mod controllers;
 pub mod interface;
 
 use std::path::Path;
-use pwr_service::PwrService;
+use services::pwr_service::PwrService;
 use controllers::pwr_controller::PwrController;
 
 #[tokio::main]
