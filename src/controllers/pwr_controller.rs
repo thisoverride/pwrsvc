@@ -1,5 +1,5 @@
 use std::path::Path;
-use crate::services::pwr_service;
+use crate::services::pwr_service::PwrService;
 use crate::interface::model::{RequestData, ResponseData};
 use tokio::net::{UnixListener, UnixStream};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
