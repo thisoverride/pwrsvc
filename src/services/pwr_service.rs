@@ -88,7 +88,8 @@ impl PwrService {
                 Duration::from_millis(config.timeout_ms)
             );
             
-            proxy.method_call(&config.interface, method, params)?;
+            // Correction ici - spécifier le type de retour explicitement
+            let _result: () = proxy.method_call(&config.interface, method, params)?;
             Ok(())
         })
         .await
@@ -194,4 +195,3 @@ impl PowerManagement for PwrService {
         Ok("Système opérationnel".to_string())
     }
 }
-
